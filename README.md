@@ -1,77 +1,102 @@
-Emteco Manutenção
+# Emteco Manutenção
 
 Sistema desenvolvido para centralizar e padronizar o registro de manutenções da Emteco Motores.
 
 A aplicação conecta um formulário personalizado ao Google Sheets, permitindo registrar informações da reclamação, processo de manutenção, produtos analisados e resultados técnicos.
 
-Visão geral do processo
+---
+
+## Visão geral do processo
+
+```text
 INÍCIO
-  │
-  ▼
+   │
+   ▼
 Registro da Reclamação
-  │
-  ▼
+   │
+   ▼
 Informações da Manutenção
-  │
-  ▼
+   │
+   ▼
 Cadastro dos Produtos
-  │
-  ▼
+   │
+   ▼
 Análise dos Defeitos
-  │
-  ▼
+   │
+   ▼
 Observações e Evidências
-  │
-  ▼
+   │
+   ▼
 Registro no Google Sheets
-Etapas do sistema
-01. Registro da reclamação
+```
+
+---
+
+## Etapas do sistema
+
+```text
+1. REGISTRO DA RECLAMAÇÃO
 
 Primeira etapa responsável pela identificação do atendimento.
 
-Informações registradas:
+Data da reclamação
+Empresa
+Código Emteco
+Data da compra
+Reclamação
+Fase da falha
+Modalidade
 
-Data da reclamação · Empresa · Código Emteco · Data da compra · Reclamação · Fase da falha · Modalidade
 
-02. Processo de manutenção
+2. PROCESSO DE MANUTENÇÃO
 
-Nesta etapa são registradas as informações internas relacionadas ao processo.
+Informações internas relacionadas ao processo.
 
-Número da tarefa · Responsável · Data de recebimento · Número de controle · Data de teste
+Número da tarefa
+Responsável
+Data de recebimento
+Número de controle
+Data de teste
 
-03. Cadastro dos produtos
 
-O sistema permite registrar múltiplos produtos dentro de uma mesma solicitação.
+3. CADASTRO DOS PRODUTOS
 
-Cada produto possui informações individuais:
+Permite registrar múltiplos produtos dentro da mesma solicitação.
 
-Produto · Qualidade · Estoque · Código/Lote · Defeito identificado
+Produto
+Qualidade
+Estoque
+Código/Lote
+Defeito identificado
 
 A quantidade de produtos é definida pelo usuário e os campos são criados dinamicamente.
 
-04. Informações complementares
 
-Etapa destinada ao registro de informações adicionais relacionadas à análise.
+4. INFORMAÇÕES COMPLEMENTARES
 
-Observações extras · Observações do fornecedor · Links de evidências · Data de finalização
+Registro de informações adicionais relacionadas à análise.
 
-05. Processamento e salvamento
+Observações extras
+Observações do fornecedor
+Links de evidências
+Data de finalização
 
-Após o envio do formulário, o sistema executa automaticamente:
+
+5. PROCESSAMENTO E SALVAMENTO
+
+Após o envio do formulário, o sistema executa:
 
 Localização da próxima linha disponível
-Identifica onde o novo registro será inserido.
+Preservação da estrutura da planilha
+Registro individual dos produtos
+Centralização das informações no Google Sheets
+```
 
-Preservação da estrutura
-Mantém fórmulas e formatação existentes na planilha.
+---
 
-Registro dos produtos
-Cria registros individuais para cada produto informado.
+## Estrutura do projeto
 
-Centralização das informações
-Todos os dados são armazenados na aba Relatório mensal de manutenção.
 
-Estrutura do projeto
 emteco-manutencao
 │
 ├── Code.js
@@ -79,13 +104,22 @@ emteco-manutencao
 │
 └── Formulario.html
     └── Interface do sistema
-Tecnologias utilizadas
-Tecnologia	Função
-Google Apps Script	Backend
-Google Sheets	Banco de dados
-HTML	Estrutura da interface
-CSS	Estilização
-JavaScript	Interações e lógica
-Objetivo
+```
+
+---
+
+## Tecnologias utilizadas
+
+| Tecnologia | Função |
+|---|---|
+| Google Apps Script | Backend e automações |
+| Google Sheets | Banco de dados |
+| HTML | Estrutura da interface |
+| CSS | Estilização |
+| JavaScript | Interações e lógica |
+
+---
+
+## Objetivo
 
 Automatizar o registro de manutenções e concentrar as informações técnicas em um único processo, reduzindo preenchimentos manuais e facilitando o acompanhamento dos registros.
