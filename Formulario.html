@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <style>
+    /* =========================================================
+       CONFIGURAÇÃO GERAL
+    ========================================================= */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: #F3F4F6;
+      font-family: Arial, sans-serif;
+      color: #333;
+      box-sizing: border-box;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* Sistema de Telas (Views) */
+    .view {
+      display: none;
+    }
+    .view.active {
+      display: block;
+    }
+
+    /* =========================================================
+       TELA INICIAL (HOME)
+    ========================================================= */
+    .home-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 80px);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .home-title {
+      font-size: 1.8rem;
+      color: #083173;
+      margin-bottom: 40px;
+      font-weight: bold;
+    }
+
+    .options-grid {
+      display: flex;
+      gap: 30px;
+      max-width: 800px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card-option {
+      background: #ffffff;
+      border: 2px solid #D9DDE2;
+      border-radius: 12px;
+      padding: 40px 30px;
+      width: 300px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .card-option:hover {
+      border-color: #083173;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(8,49,115,0.15);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+    }
+
+    .card-option span {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #083173;
+    }
+
+    /* =========================================================
+       CABEÇALHO — DESKTOP
+    ========================================================= */
+    .header {
+      background: #083173;
+      color: white;
+      padding: 22px 35px;
+      display: flex;
+      align-items: center;
+      border-bottom: 4px solid #D9D9D9;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-text {
+      font-size: 14px;
+      font-weight: bold;
+      margin-right: 30px;
+      letter-spacing: 0.5px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .header p {
+      margin: 5px 0 0 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .btn-voltar-home {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 13px;
+    }
+    .btn-voltar-home:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* =========================================================
+       CONTAINER — DESKTOP
+    ========================================================= */
+    .container {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 25px 35px 100px;
+    }
+
+    /* =========================================================
+       SEÇÕES — DESKTOP
+    ========================================================= */
+    .section {
+      background: #FFFFFF;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .section-title {
+      background: #D9D9D9;
+      color: #083173;
+      font-size: 15px;
+      font-weight: bold;
+      padding: 13px 18px;
+      border-left: 6px solid #083173;
+    }
+
+    .section-content {
+      padding: 20px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .field {
+      width: 100%;
+      min-width: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+      color: #37474F;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #C9CDD3;
+      border-radius: 5px;
+      padding: 10px 11px;
+      font-size: 14px;
+      background: #FFFFFF;
+      color: #333;
+      outline: none;
+      font-family: Arial, sans-serif;
+    }
+
+    input, select {
+      height: 42px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #083173;
+      box-shadow: 0 0 0 2px rgba(8, 49, 115, 0.08);
+    }
+
+    .quantidade-area {
+      margin-bottom: 20px;
+    }
+
+    .quantidade-area .field {
+      width: 180px;
+    }
+
+    #produtosContainer {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .produto-card {
+      width: 100%;
+      border: 1px solid #D9DDE2;
+      border-radius: 7px;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .produto-titulo {
+      background: #083173;
+      color: #FFFFFF;
+      padding: 11px 15px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .produto-content {
+      padding: 18px;
+    }
+
+    .produto-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .produto-grid .full {
+      grid-column: span 4;
+    }
+
+    /* =========================================================
+       AÇÕES — DESKTOP
+    ========================================================= */
+    .acoes {
+      position: sticky;
+      bottom: 0;
+      z-index: 50;
+      width: 100%;
+      background: #FFFFFF;
+      border-top: 1px solid #D9DDE2;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .acoes button {
+      min-height: 44px;
+      border: none;
+      border-radius: 5px;
+      padding: 0 24px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn-cancelar {
+      background: #EEEEEE;
+      color: #424242;
+    }
+
+    .btn-salvar {
+      background: #083173;
+      color: #FFFFFF;
+      min-width: 190px;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 25px;
+      font-size: 15px;
+      color: #083173;
+      font-weight: bold;
+    }
+
+    /* =========================================================
+       RESPONSIVIDADE (CELULAR / TABLET)
+    ========================================================= */
+    @media (max-width: 768px) {
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .header-left {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .logo-text { display: none; }
+      .container { padding: 10px 9px 15px; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; }
+      .produto-grid { grid-template-columns: 1fr !important; }
+      .acoes {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        z-index: 9999;
+        padding: 10px;
+        background: #FFFFFF;
+      }
+      .acoes button { flex: 1; height: 50px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+     TELA 1: TELA INICIAL (HOME)
+  ========================================================== -->
+  <div id="viewHome" class="view active">
+    <div class="header">
+      <div class="logo-text">EMTECO MOTORES</div>
+      <div>
+        <h1>Sistema de Controle de Manutenção</h1>
+        <p>Página Inicial</p>
+      </div>
+    </div>
+    
+    <div class="home-container">
+      <div class="home-title">O que você deseja fazer hoje?</div>
+      
+      <div class="options-grid">
+        <div class="card-option" onclick="mudarTela('viewFormulario')">
+          <div class="card-icon">➕</div>
+          <span>Criar Novo Registro de Manutenção</span>
+        </div>
+
+        <div class="card-option" onclick="alert('Funcionalidade de atualização em breve!')">
+          <div class="card-icon">🔄</div>
+          <span>Atualizar Registro Existente</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================================
+     TELA 2: FORMULÁRIO (O SEU CÓDIGO ORIGINAL)
+  ========================================================== -->
+  <div id="viewFormulario" class="view">
+
+    <!-- Cabeçalho do Formulário -->
+    <div class="header">
+      <div class="header-left">
+        <div class="logo-text">EMTECO MOTORES</div>
+        <div>
+          <h1>Novo Registro de Manutenção</h1>
+          <p>Sistema de Controle de Manutenção</p>
+        </div>
+      </div>
+      <button type="button" class="btn-voltar-home" onclick="mudarTela('viewHome')">⬅ Voltar ao Início</button>
+    </div>
+
+    <div class="container">
+      <form id="formulario">
+
+        <!-- DADOS DA RECLAMAÇÃO -->
+        <div class="section">
+          <div class="section-title">DADOS DA RECLAMAÇÃO</div>
+          <div class="section-content">
+            <div class="grid-2">
+              <div class="field">
+                <label>Data de Reclamação</label>
+                <input type="date" id="dataReclamacao">
+              </div>
+              <div class="field">
+                <label>Empresa</label>
+                <input type="text" id="empresa">
+              </div>
+              <div class="field">
+                <label>Código Emteco</label>
+                <input type="text" id="codigoEmteco">
+              </div>
+              <div class="field">
+                <label>Data de Compra</label>
+                <input type="date" id="dataCompra">
+              </div>
+              <div class="field">
+                <label>Reclamação / Defeito</label>
+                <textarea id="reclamacaoDefeito"></textarea>
+              </div>
+              <div class="field">
+                <label>Fase da Falha</label>
+                <select id="faseFalha"></select>
+              </div>
+              <div class="field">
+                <label>Modalidade</label>
+                <select id="modalidade"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INFORMAÇÕES DO PROCESSO -->
+        <div class="section">
+          <div class="section-title">INFORMAÇÕES DO PROCESSO</div>
+          <div class="section-content">
+            <div class="grid-3">
+              <div class="field">
+                <label>Número da Tarefa</label>
+                <input type="text" id="numeroTarefa">
+              </div>
+              <div class="field">
+                <label>Responsável</label>
+                <select id="responsavel"></select>
+              </div>
+              <div class="field">
+                <label>Data de Recebimento</label>
+                <input type="date" id="dataRecebimento">
+              </div>
+              <div class="field">
+                <label>Número de Controle</label>
+                <input type="text" id="numeroControle">
+              </div>
+              <div class="field">
+                <label>Data de Teste</label>
+                <input type="date" id="dataTeste">
+              </div>
+              <div class="field">
+                <label>Item Movimentado</label>
+                <select id="itemMovimentado"></select>
+              </div>
+              <div class="field">
+                <label>Tipo de Estoque</label>
+                <select id="tipoEstoque"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUTOS -->
+        <div class="section">
+          <div class="section-title">PRODUTOS</div>
+          <div class="section-content">
+            <div class="quantidade-area">
+              <div class="field">
+                <label>Quantidade de Produtos</label>
+                <input type="number" id="quantidade" min="1" value="1" onchange="gerarProdutos()">
+              </div>
+            </div>
+            <div id="produtosContainer"></div>
+          </div>
+        </div>
+
+        <!-- OBSERVAÇÕES E FINALIZAÇÃO -->
+        <div class="section">
+          <div class="section-title">OBSERVAÇÕES E FINALIZAÇÃO</div>
+          <div class="section-content">
+            <div class="grid-2">
+              <div class="field">
+                <label>Observação Extra</label>
+                <textarea id="observacaoExtra"></textarea>
+              </div>
+              <div class="field">
+                <label>Observação Fornecedor</label>
+                <textarea id="observacaoFornecedor"></textarea>
+              </div>
+              <div class="field">
+                <label>Vídeo</label>
+                <input type="text" id="video">
+              </div>
+              <div class="field">
+                <label>Data de Finalização</label>
+                <input type="date" id="dataFinalizacao">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+      <div id="loading" class="loading">Salvando registro...</div>
+    </div>
+
+    <!-- AÇÕES -->
+    <div class="acoes">
+      <button type="button" class="btn-cancelar" onclick="document.getElementById('formulario').reset(); gerarProdutos();">
+        Cancelar
+      </button>
+      <button type="button" class="btn-salvar" onclick="salvar()">
+        SALVAR REGISTRO
+      </button>
+    </div>
+
+  </div>
+
+
+  <script>
+    /* =========================================================
+       CONTROLE DE NAVEGAÇÃO ENTRE TELAS
+    ========================================================= */
+    function mudarTela(idView) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(idView).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    /* =========================================================
+       VARIÁVEIS E FUNÇÕES DO GOOGLE SHEETS
+    ========================================================= */
+    let opcoes = {};
+
+    google.script.run
+      .withSuccessHandler(function(dados) {
+        opcoes = dados || {};
+        preencherSelect('faseFalha', opcoes.faseFalha);
+        preencherSelect('modalidade', opcoes.modalidade);
+        preencherSelect('responsavel', opcoes.responsavel);
+        preencherSelect('itemMovimentado', opcoes.itemMovimentado);
+        preencherSelect('tipoEstoque', opcoes.tipoEstoque);
+        gerarProdutos();
+      })
+      .withFailureHandler(function(erro) {
+        alert('Erro ao carregar os dados do formulário: ' + erro.message);
+      })
+      .obterDadosFormulario();
+
+    function preencherSelect(id, valores) {
+      const select = document.getElementById(id);
+      if (!select) return;
+      select.innerHTML = '<option value="">Selecione...</option>';
+      if (!valores) return;
+      valores.forEach(function(valor) {
+        const option = document.createElement('option');
+        option.value = valor;
+        option.textContent = valor;
+        select.appendChild(option);
+      });
+    }
+
+    function gerarProdutos() {
+      const quantidade = Number(document.getElementById('quantidade').value) || 1;
+      const container = document.getElementById('produtosContainer');
+      container.innerHTML = '';
+
+      for (let i = 0; i < quantidade; i++) {
+        const card = document.createElement('div');
+        card.className = 'produto-card';
+        card.innerHTML = `
+          <div class="produto-titulo">PRODUTO ${i + 1}</div>
+          <div class="produto-content">
+            <div class="produto-grid">
+              <div class="field">
+                <label>Produto</label>
+                <select class="produto">${criarOptions(opcoes.produto)}</select>
+              </div>
+              <div class="field">
+                <label>Qualidade</label>
+                <select class="qualidade">${criarOptions(opcoes.qualidade)}</select>
+              </div>
+              <div class="field">
+                <label>Estoque Retirada</label>
+                <select class="estoqueRetirada">${criarOptions(opcoes.estoque)}</select>
+              </div>
+              <div class="field">
+                <label>Código / Lote</label>
+                <input type="text" class="codigoLote">
+              </div>
+              <div class="field full">
+                <label>Defeito Identificado</label>
+                <select class="defeitoIdentificado">${criarOptions(opcoes.defeitoIdentificado)}</select>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      }
+    }
+
+    function criarOptions(valores) {
+      let html = '<option value="">Selecione...</option>';
+      if (!valores) return html;
+      valores.forEach(function(valor) {
+        html += '<option value="' + String(valor).replace(/"/g, '&quot;') + '">' + valor + '</option>';
+      });
+      return html;
+    }
+
+    function salvar() {
+      // Função mantida para integrar com o seu Apps Script de salvamento
+      alert("Função de salvar acionada!");
+    }
+  </script>
+
+</body>
+</html>
