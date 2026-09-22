@@ -7,9 +7,6 @@
   <title>Sistema de Controle de Manutenção - Emteco Motores</title>
 
   <style>
-    /* =========================================================
-        CONFIGURAÇÃO GERAL
-    ========================================================= */
     html, body {
       margin: 0;
       padding: 0;
@@ -21,31 +18,52 @@
       box-sizing: border-box;
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
+    *, *::before, *::after { box-sizing: border-box; }
+    body { overflow-x: hidden; }
+    .view { display: none; }
+    .view.active { display: block; }
+
+    .home-header {
+      background: #083173;
+      color: white;
+      min-height: 110px;
+      padding: 22px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 4px solid #D9D9D9;
     }
 
-    body {
-      overflow-x: hidden;
+    .home-header-logo {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
     }
 
-    /* Sistema de Telas (Views) */
-    .view {
-      display: none;
-    }
-    .view.active {
-      display: block;
+    .home-header-info {
+      text-align: left;
+      min-width: 500px;
     }
 
-    /* =========================================================
-        TELA INICIAL (HOME)
-    ========================================================= */
+    .home-header-info h1 {
+      margin: 0;
+      font-size: 24px;
+      color: white;
+    }
+
+    .home-header-info p {
+      margin: 5px 0 0;
+      font-size: 13px;
+      color: white;
+      opacity: 0.9;
+    }
+
     .home-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: calc(100vh - 80px);
+      min-height: calc(100vh - 114px);
       padding: 20px;
       text-align: center;
     }
@@ -67,11 +85,12 @@
     }
 
     .card-option {
-      background: #ffffff;
+      background: #FFFFFF;
       border: 2px solid #D9DDE2;
       border-radius: 12px;
       padding: 40px 30px;
-      width: 300px;
+      width: 350px;
+      min-height: 245px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -79,6 +98,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 20px;
     }
 
@@ -88,9 +108,7 @@
       box-shadow: 0 8px 15px rgba(8,49,115,0.15);
     }
 
-    .card-icon {
-      font-size: 3rem;
-    }
+    .card-icon { font-size: 3rem; }
 
     .card-option span {
       font-size: 1.1rem;
@@ -98,17 +116,14 @@
       color: #083173;
     }
 
-    /* =========================================================
-        CABEÇALHO
-    ========================================================= */
     .header {
       background: #083173;
       color: white;
       padding: 22px 35px;
       display: flex;
       align-items: center;
-      border-bottom: 4px solid #D9D9D9;
       justify-content: space-between;
+      border-bottom: 4px solid #D9D9D9;
     }
 
     .header-left {
@@ -129,29 +144,24 @@
     }
 
     .header p {
-      margin: 5px 0 0 0;
+      margin: 5px 0 0;
       font-size: 13px;
       opacity: 0.9;
     }
 
     .btn-voltar-home {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255,255,255,0.15);
       color: white;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255,255,255,0.4);
       padding: 8px 16px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
       font-size: 13px;
-      transition: background 0.2s;
-    }
-    .btn-voltar-home:hover {
-      background: rgba(255, 255, 255, 0.25);
     }
 
-    /* =========================================================
-        CONTAINER E SEÇÕES
-    ========================================================= */
+    .btn-voltar-home:hover { background: rgba(255,255,255,0.25); }
+
     .container {
       width: 100%;
       max-width: 1600px;
@@ -159,11 +169,18 @@
       padding: 25px 35px 100px;
     }
 
+    .busca-container {
+      width: 100%;
+      max-width: 650px;
+      margin: 70px auto;
+      padding: 0 20px;
+    }
+
     .section {
       background: #FFFFFF;
       margin-bottom: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 7px rgba(0,0,0,0.08);
       overflow: hidden;
     }
 
@@ -176,9 +193,7 @@
       border-left: 6px solid #083173;
     }
 
-    .section-content {
-      padding: 20px;
-    }
+    .section-content { padding: 20px; }
 
     .grid-2 {
       display: grid;
@@ -191,6 +206,8 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
+
+    .full-row { grid-column: 1 / -1; }
 
     .field {
       width: 100%;
@@ -217,18 +234,12 @@
       font-family: Arial, sans-serif;
     }
 
-    input, select {
-      height: 42px;
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
+    input, select { height: 42px; }
+    textarea { min-height: 100px; resize: vertical; }
 
     input:focus, select:focus, textarea:focus {
       border-color: #083173;
-      box-shadow: 0 0 0 2px rgba(8, 49, 115, 0.08);
+      box-shadow: 0 0 0 2px rgba(8,49,115,0.08);
     }
 
     input:disabled, select:disabled, textarea:disabled {
@@ -237,13 +248,8 @@
       cursor: not-allowed;
     }
 
-    .quantidade-area {
-      margin-bottom: 20px;
-    }
-
-    .quantidade-area .field {
-      width: 180px;
-    }
+    .quantidade-area { margin-bottom: 20px; }
+    .quantidade-area .field { width: 180px; }
 
     #produtosContainer {
       display: grid;
@@ -267,9 +273,7 @@
       font-weight: bold;
     }
 
-    .produto-content {
-      padding: 18px;
-    }
+    .produto-content { padding: 18px; }
 
     .produto-grid {
       display: grid;
@@ -277,13 +281,8 @@
       gap: 16px;
     }
 
-    .produto-grid .full {
-      grid-column: span 4;
-    }
+    .produto-grid .full { grid-column: span 4; }
 
-    /* =========================================================
-        AÇÕES E BOTÕES INTERATIVOS
-    ========================================================= */
     .acoes {
       position: sticky;
       bottom: 0;
@@ -295,10 +294,11 @@
       display: flex;
       justify-content: flex-end;
       gap: 12px;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
     }
 
-    .acoes button, .btn-salvar {
+    .acoes button, .btn-salvar, .btn-buscar, .btn-secundario,
+    .btn-email-cancelar, .btn-email-enviar {
       min-height: 44px;
       border: none;
       border-radius: 5px;
@@ -307,31 +307,20 @@
       font-weight: bold;
       cursor: pointer;
       font-family: Arial, sans-serif;
-      transition: background 0.2s ease, transform 0.1s ease;
     }
 
-    .btn-salvar:hover, .acoes button:hover {
-      opacity: 0.9;
-      filter: brightness(1.1);
-    }
-
-    .btn-salvar:active, .acoes button:active {
-      transform: scale(0.98);
-    }
-
-    .btn-cancelar {
+    .btn-cancelar, .btn-secundario, .btn-email-cancelar {
       background: #EEEEEE;
       color: #424242;
     }
-    .btn-cancelar:hover {
-      background: #DDDDDD;
-    }
 
-    .btn-salvar {
+    .btn-salvar, .btn-buscar, .btn-email, .btn-email-enviar {
       background: #083173;
       color: #FFFFFF;
-      min-width: 190px;
     }
+
+    .btn-salvar { min-width: 190px; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     .loading {
       display: none;
@@ -342,10 +331,78 @@
       font-weight: bold;
     }
 
-    /* =========================================================
-        RESPONSIVIDADE
-    ========================================================= */
+    .mensagem-busca {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .busca-acoes {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .modal-email {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.45);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-email-content {
+      width: 100%;
+      max-width: 500px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .modal-email-header {
+      background: #083173;
+      color: #FFFFFF;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .modal-email-body { padding: 20px; }
+    .modal-email-body .field { margin-bottom: 16px; }
+
+    .modal-email-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 15px 20px;
+      border-top: 1px solid #D9DDE2;
+    }
+
     @media (max-width: 768px) {
+      .home-header {
+        padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .home-header-info {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .card-option {
+        width: 100%;
+        max-width: 350px;
+      }
+
       .header {
         position: sticky;
         top: 0;
@@ -355,37 +412,115 @@
         align-items: flex-start;
         gap: 10px;
       }
-      .header-left {
-        width: 100%;
-        justify-content: space-between;
-      }
+
       .logo-text { display: none; }
-      .container { padding: 10px 9px 15px; }
+      .container { padding: 10px 9px 100px; }
+      .busca-container { margin: 25px auto; padding: 0 10px; }
       .grid-2, .grid-3 { grid-template-columns: 1fr !important; }
+      .full-row { grid-column: 1; }
       .produto-grid { grid-template-columns: 1fr; }
+      .produto-grid .full { grid-column: span 1; }
+
+      .acoes {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-wrap: wrap;
+      }
+
+      .acoes button { flex: 1; min-width: 130px; }
+      .busca-acoes { flex-direction: column-reverse; }
+      .busca-acoes button { width: 100%; }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- =========================================================
-      TELA 1: MENU INICIAL (HOME)
-  ========================================================= -->
+  <!-- TELA 1: HOME -->
   <div id="homeView" class="view active">
+    <header class="home-header">
+      <div class="home-header-logo">EMTECO MOTORES</div>
+      <div class="home-header-info">
+        <h1>Sistema de Controle de Manutenção</h1>
+        <p>Página Inicial</p>
+      </div>
+    </header>
+
     <div class="home-container">
-      <div class="home-title">Emteco Motores - Sistema de Manutenção</div>
+      <div class="home-title">O que você deseja fazer hoje?</div>
+
       <div class="options-grid">
         <div class="card-option" onclick="mudarTela('novo')">
-          <div class="card-icon">📝</div>
-          <span>Novo Registro de Manutenção</span>
+          <div class="card-icon">➕</div>
+          <span>Criar Novo Registro de Manutenção</span>
+        </div>
+
+        <div class="card-option" onclick="mudarTela('atualizar')">
+          <div class="card-icon">🔄</div>
+          <span>Atualizar Registro Existente</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- =========================================================
-      TELA 2: FORMULÁRIO PRINCIPAL
-  ========================================================= -->
+  <!-- TELA 2: BUSCAR REGISTRO -->
+  <div id="buscaView" class="view">
+    <header class="header">
+      <div class="header-left">
+        <span class="logo-text">EMTECO MOTORES</span>
+        <div>
+          <h1>Atualizar Registro de Manutenção</h1>
+          <p>Localize uma tarefa existente para realizar alterações</p>
+        </div>
+      </div>
+
+      <button type="button" class="btn-voltar-home" onclick="mudarTela('home')">
+        ⬅ Voltar ao Início
+      </button>
+    </header>
+
+    <div class="busca-container">
+      <div class="section">
+        <div class="section-title">Buscar Registro</div>
+
+        <div class="section-content">
+          <p>Informe o número da tarefa para localizar o registro de manutenção.</p>
+
+          <div class="field">
+            <label>Número da Tarefa *</label>
+            <input
+              type="text"
+              id="numeroTarefaBusca"
+              placeholder="Digite o número da tarefa"
+              autocomplete="off"
+              onkeydown="if(event.key === 'Enter'){event.preventDefault(); buscarRegistro();}"
+            >
+          </div>
+
+          <div id="mensagemBusca" class="mensagem-busca"></div>
+
+          <div class="busca-acoes">
+            <button type="button" class="btn-secundario" onclick="mudarTela('home')">
+              Cancelar
+            </button>
+
+            <button
+              type="button"
+              class="btn-buscar"
+              id="btnBuscarRegistro"
+              onclick="buscarRegistro()"
+            >
+              Buscar Registro
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA 3: FORMULÁRIO -->
   <div id="formularioView" class="view">
     <header class="header">
       <div class="header-left">
@@ -395,47 +530,55 @@
           <p>Preencha os dados da reclamação e controle técnico</p>
         </div>
       </div>
-      <button class="btn-voltar-home" onclick="mudarTela('home')">⬅ Voltar ao Início</button>
+
+      <button type="button" class="btn-voltar-home" onclick="voltarFormulario()">
+        ⬅ Voltar
+      </button>
     </header>
 
     <div class="container">
       <div id="loadingDados" class="loading">Carregando dados da planilha...</div>
 
-      <!-- Formulário -->
       <form id="formManutencao" onsubmit="enviarFormulario(event)">
-        
-        <!-- Seção: Dados Gerais -->
         <div class="section">
           <div class="section-title">1. Dados Gerais da Reclamação</div>
+
           <div class="section-content grid-3">
             <div class="field">
               <label>Data da Reclamação *</label>
               <input type="date" id="dataReclamacao" required>
             </div>
+
             <div class="field">
               <label>Empresa / Cliente *</label>
               <input type="text" id="empresa" placeholder="Nome da empresa" required>
             </div>
+
             <div class="field">
               <label>Código Emteco</label>
               <input type="text" id="codigoEmteco" placeholder="Código do motor/produto">
             </div>
+
             <div class="field">
               <label>Data da Compra</label>
               <input type="date" id="dataCompra">
             </div>
+
             <div class="field">
               <label>Reclamação / Defeito Relatado *</label>
               <input type="text" id="reclamacaoDefeito" placeholder="Descrição do problema" required>
             </div>
+
             <div class="field">
               <label>Fase da Falha *</label>
               <select id="faseFalha" required><option value="">Selecione...</option></select>
             </div>
+
             <div class="field">
               <label>Modalidade *</label>
               <select id="modalidade" required><option value="">Selecione...</option></select>
             </div>
+
             <div class="field">
               <label>Número da Tarefa *</label>
               <input type="text" id="numeroTarefa" placeholder="Nº da Tarefa" required>
@@ -443,116 +586,279 @@
           </div>
         </div>
 
-        <!-- Seção: Produtos (Quantidade Dinâmica) -->
         <div class="section">
           <div class="section-title">2. Produtos Envolvidos</div>
+
           <div class="section-content">
             <div class="quantidade-area">
               <div class="field">
                 <label>Quantidade de Produtos *</label>
-                <input type="number" id="quantidade" min="1" value="1" onchange="gerarCardsProdutos()">
+                <input type="number" id="quantidade" min="1" value="1" onchange="gerarCardsProdutos()" required>
               </div>
             </div>
+
             <div id="produtosContainer"></div>
           </div>
         </div>
 
-        <!-- Seção: Análise Técnica -->
         <div class="section">
           <div class="section-title">3. Análise Técnica e Pós-Teste</div>
+
           <div class="section-content grid-3">
             <div class="field">
               <label>Responsável Técnico *</label>
               <select id="responsavel" required><option value="">Selecione...</option></select>
             </div>
+
             <div class="field">
               <label>Data de Recebimento</label>
               <input type="date" id="dataRecebimento">
             </div>
+
             <div class="field">
               <label>Número de Controle</label>
               <input type="text" id="numeroControle" placeholder="Nº de Controle">
             </div>
+
             <div class="field">
               <label>Data do Teste</label>
               <input type="date" id="dataTeste">
             </div>
+
             <div class="field">
               <label>Item Movimentado</label>
               <select id="itemMovimentado"><option value="">Selecione...</option></select>
             </div>
+
             <div class="field">
               <label>Tipo de Estoque</label>
               <select id="tipoEstoque"><option value="">Selecione...</option></select>
             </div>
+
             <div class="field">
               <label>Data de Finalização</label>
               <input type="date" id="dataFinalizacao">
             </div>
+
             <div class="field">
               <label>Link do Vídeo</label>
               <input type="text" id="video" placeholder="URL do vídeo de teste">
             </div>
-            <div class="field" style="grid-column: span 3;">
+
+            <div class="field full-row">
               <label>Observação Extra</label>
               <textarea id="observacaoExtra" placeholder="Observações adicionais"></textarea>
             </div>
-            <div class="field" style="grid-column: span 3;">
+
+            <div class="field full-row">
               <label>Observação Fornecedor</label>
               <textarea id="observacaoFornecedor" placeholder="Comentários direcionados ao fornecedor"></textarea>
             </div>
           </div>
         </div>
 
-        <!-- Botões de Ação Fixos -->
         <div class="acoes">
-          <button type="button" class="btn-cancelar" onclick="mudarTela('home')">Cancelar</button>
-          <button type="submit" class="btn-salvar" id="btnSalvar">Salvar Registro</button>
-        </div>
+          <button type="button" class="btn-cancelar" onclick="voltarFormulario()">
+            Cancelar
+          </button>
 
+          <button type="button" class="btn-email" onclick="abrirEnvioEmail()">
+            Enviar Relatório PDF
+          </button>
+
+          <button type="submit" class="btn-salvar" id="btnSalvar">
+            Salvar Registro
+          </button>
+        </div>
       </form>
     </div>
   </div>
 
-  <!-- =========================================================
-      SCRIPTS E INTEGRAÇÃO COM BACKEND (.GS)
-  ========================================================= -->
+  <!-- MODAL DE E-MAIL -->
+  <div id="modalEmail" class="modal-email">
+    <div class="modal-email-content">
+      <div class="modal-email-header">Enviar Relatório de Manutenção</div>
+
+      <div class="modal-email-body">
+        <div class="field">
+          <label>Número da Tarefa</label>
+          <input type="text" id="emailTarefa" placeholder="Número da tarefa">
+        </div>
+
+        <div class="field">
+          <label>Destinatários</label>
+          <input type="text" id="emailDestinatarios" placeholder="exemplo@email.com, outro@email.com">
+        </div>
+      </div>
+
+      <div class="modal-email-actions">
+        <button type="button" class="btn-email-cancelar" onclick="fecharEnvioEmail()">
+          Cancelar
+        </button>
+
+        <button type="button" class="btn-email-enviar" id="btnConfirmarEmail" onclick="confirmarEnvioEmail()">
+          Enviar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
     let opcoesSelects = {};
+    let modoFormulario = 'novo';
+
+    function esconderTelas() {
+      document.querySelectorAll('.view').forEach(view => {
+        view.classList.remove('active');
+      });
+    }
 
     function mudarTela(tipo) {
-      document.getElementById('homeView').classList.remove('active');
-      document.getElementById('formularioView').classList.remove('active');
+      esconderTelas();
+
+      if (tipo === 'home') {
+        modoFormulario = 'novo';
+        document.getElementById('homeView').classList.add('active');
+        window.scrollTo(0, 0);
+        return;
+      }
 
       if (tipo === 'novo') {
-        document.getElementById('tituloFormulario').innerText = "Novo Registro de Manutenção";
-        document.getElementById('formManutencao').reset();
-        document.getElementById('numeroTarefa').disabled = false;
-        gerarCardsProdutos();
+        modoFormulario = 'novo';
+        prepararNovoRegistro();
         document.getElementById('formularioView').classList.add('active');
         carregarOpcoesSelects();
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      if (tipo === 'atualizar') {
+        modoFormulario = 'atualizar';
+
+        const campo = document.getElementById('numeroTarefaBusca');
+        const mensagem = document.getElementById('mensagemBusca');
+
+        campo.value = '';
+        mensagem.style.display = 'none';
+        mensagem.textContent = '';
+
+        document.getElementById('buscaView').classList.add('active');
+        window.scrollTo(0, 0);
+
+        setTimeout(() => campo.focus(), 100);
+        return;
+      }
+
+      document.getElementById('homeView').classList.add('active');
+    }
+
+    function voltarFormulario() {
+      if (modoFormulario === 'atualizar') {
+        mudarTela('atualizar');
       } else {
-        document.getElementById('homeView').classList.add('active');
+        mudarTela('home');
       }
     }
 
-    function carregarOpcoesSelects() {
-      document.getElementById('loadingDados').style.display = 'block';
+    function prepararNovoRegistro() {
+      document.getElementById('formManutencao').reset();
+      document.getElementById('tituloFormulario').textContent =
+        'Novo Registro de Manutenção';
+      document.getElementById('btnSalvar').textContent =
+        'Salvar Registro';
+      document.getElementById('numeroTarefa').disabled = false;
+      document.getElementById('quantidade').value = 1;
+      gerarCardsProdutos();
+    }
+
+    function mostrarMensagemBusca(texto, sucesso) {
+      const mensagem = document.getElementById('mensagemBusca');
+      mensagem.style.display = 'block';
+      mensagem.style.background = sucesso ? '#D1E7DD' : '#F8D7DA';
+      mensagem.style.color = sucesso ? '#0F5132' : '#842029';
+      mensagem.textContent = texto;
+    }
+
+    function buscarRegistro() {
+      const campo = document.getElementById('numeroTarefaBusca');
+      const numeroTarefa = campo.value.trim();
+      const botao = document.getElementById('btnBuscarRegistro');
+
+      document.getElementById('mensagemBusca').style.display = 'none';
+
+      if (!numeroTarefa) {
+        mostrarMensagemBusca('Informe o número da tarefa.', false);
+        campo.focus();
+        return;
+      }
+
+      botao.disabled = true;
+      botao.textContent = 'Buscando...';
+
       google.script.run
         .withSuccessHandler(dados => {
-          opcoesSelects = dados;
-          preencherSelect('faseFalha', dados.faseFalha);
-          preencherSelect('modalidade', dados.modalidade);
-          preencherSelect('responsavel', dados.responsavel);
-          preencherSelect('itemMovimentado', dados.itemMovimentado);
-          preencherSelect('tipoEstoque', dados.tipoEstoque);
-          document.getElementById('loadingDados').style.display = 'none';
-          
-          atualizarSelectsProdutos();
+          botao.disabled = false;
+          botao.textContent = 'Buscar Registro';
+
+          if (!dados || dados.encontrado !== true) {
+            mostrarMensagemBusca(
+              dados && dados.mensagem
+                ? dados.mensagem
+                : 'Tarefa não encontrada.',
+              false
+            );
+            return;
+          }
+
+          mostrarMensagemBusca(
+            'Tarefa encontrada. Carregando registro...',
+            true
+          );
+
+          carregarOpcoesSelects(() => {
+            preencherFormularioAtualizacao(dados);
+          });
         })
         .withFailureHandler(err => {
-          document.getElementById('loadingDados').style.display = 'none';
-          alert("Erro ao carregar opções da planilha: " + err.message);
+          botao.disabled = false;
+          botao.textContent = 'Buscar Registro';
+
+          mostrarMensagemBusca(
+            'Erro ao buscar tarefa: ' + (err.message || err),
+            false
+          );
+        })
+        .buscarTarefa(numeroTarefa);
+    }
+
+    function carregarOpcoesSelects(callback) {
+      const loading = document.getElementById('loadingDados');
+      loading.style.display = 'block';
+
+      google.script.run
+        .withSuccessHandler(dados => {
+          opcoesSelects = dados || {};
+
+          preencherSelect('faseFalha', opcoesSelects.faseFalha);
+          preencherSelect('modalidade', opcoesSelects.modalidade);
+          preencherSelect('responsavel', opcoesSelects.responsavel);
+          preencherSelect('itemMovimentado', opcoesSelects.itemMovimentado);
+          preencherSelect('tipoEstoque', opcoesSelects.tipoEstoque);
+
+          atualizarSelectsProdutos();
+
+          loading.style.display = 'none';
+
+          if (typeof callback === 'function') {
+            callback();
+          }
+        })
+        .withFailureHandler(err => {
+          loading.style.display = 'none';
+          alert(
+            'Erro ao carregar opções da planilha: ' +
+            (err.message || err)
+          );
         })
         .obterDadosFormulario();
     }
@@ -560,102 +866,284 @@
     function preencherSelect(id, itens) {
       const select = document.getElementById(id);
       if (!select) return;
+
       const valorAtual = select.value;
       select.innerHTML = '<option value="">Selecione...</option>';
+
       if (Array.isArray(itens)) {
         itens.forEach(item => {
-          const opt = document.createElement('option');
-          opt.value = item;
-          opt.textContent = item;
-          select.appendChild(opt);
+          const option = document.createElement('option');
+          option.value = item;
+          option.textContent = item;
+          select.appendChild(option);
         });
       }
+
+      garantirOpcaoSelect(select, valorAtual);
       select.value = valorAtual;
     }
 
-    function gerarCardsProdutos() {
-      const qtd = parseInt(document.getElementById('quantidade').value) || 1;
+    function garantirOpcaoSelect(select, valor) {
+      if (!select || valor === null || valor === undefined || valor === '') {
+        return;
+      }
+
+      const texto = String(valor);
+      const existe = Array.from(select.options)
+        .some(option => String(option.value) === texto);
+
+      if (!existe) {
+        const option = document.createElement('option');
+        option.value = texto;
+        option.textContent = texto;
+        select.appendChild(option);
+      }
+    }
+
+    function coletarProdutosAtuais() {
+      return Array.from(document.querySelectorAll('.produto-card')).map(card => ({
+        produto: card.querySelector('[name="produto"]')?.value || '',
+        qualidade: card.querySelector('[name="qualidade"]')?.value || '',
+        estoqueRetirada: card.querySelector('[name="estoqueRetirada"]')?.value || '',
+        codigoLote: card.querySelector('[name="codigoLote"]')?.value || '',
+        defeitoIdentificado: card.querySelector('[name="defeitoIdentificado"]')?.value || ''
+      }));
+    }
+
+    function gerarCardsProdutos(produtosParaRestaurar) {
+      const quantidadeInput = document.getElementById('quantidade');
+      let qtd = parseInt(quantidadeInput.value, 10);
+
+      if (!qtd || qtd < 1) {
+        qtd = 1;
+        quantidadeInput.value = 1;
+      }
+
+      const produtosAntigos = Array.isArray(produtosParaRestaurar)
+        ? produtosParaRestaurar
+        : coletarProdutosAtuais();
+
       const container = document.getElementById('produtosContainer');
       container.innerHTML = '';
 
       for (let i = 0; i < qtd; i++) {
         const card = document.createElement('div');
         card.className = 'produto-card';
+
         card.innerHTML = `
           <div class="produto-titulo">Produto ${i + 1}</div>
           <div class="produto-content">
             <div class="produto-grid">
               <div class="field">
                 <label>Produto *</label>
-                <select name="produto" required><option value="">Selecione...</option></select>
+                <select name="produto" required>
+                  <option value="">Selecione...</option>
+                </select>
               </div>
+
               <div class="field">
                 <label>Qualidade *</label>
-                <select name="qualidade" required><option value="">Selecione...</option></select>
+                <select name="qualidade" required>
+                  <option value="">Selecione...</option>
+                </select>
               </div>
+
               <div class="field">
                 <label>Estoque Retirada *</label>
-                <select name="estoqueRetirada" required><option value="">Selecione...</option></select>
+                <select name="estoqueRetirada" required>
+                  <option value="">Selecione...</option>
+                </select>
               </div>
+
               <div class="field">
                 <label>Código / Lote</label>
                 <input type="text" name="codigoLote" placeholder="Lote do produto">
               </div>
+
               <div class="field full">
                 <label>Defeito Identificado *</label>
-                <select name="defeitoIdentificado" required><option value="">Selecione...</option></select>
+                <select name="defeitoIdentificado" required>
+                  <option value="">Selecione...</option>
+                </select>
               </div>
             </div>
           </div>
         `;
+
         container.appendChild(card);
       }
+
       atualizarSelectsProdutos();
+
+      const cards = document.querySelectorAll('.produto-card');
+
+      produtosAntigos.forEach((produto, indice) => {
+        const card = cards[indice];
+        if (!card) return;
+
+        definirValorSelectElemento(
+          card.querySelector('[name="produto"]'),
+          produto.produto
+        );
+
+        definirValorSelectElemento(
+          card.querySelector('[name="qualidade"]'),
+          produto.qualidade
+        );
+
+        definirValorSelectElemento(
+          card.querySelector('[name="estoqueRetirada"]'),
+          produto.estoqueRetirada
+        );
+
+        card.querySelector('[name="codigoLote"]').value =
+          produto.codigoLote || '';
+
+        definirValorSelectElemento(
+          card.querySelector('[name="defeitoIdentificado"]'),
+          produto.defeitoIdentificado
+        );
+      });
     }
 
     function atualizarSelectsProdutos() {
-      if (!opcoesSelects.produto) return;
-      
       document.querySelectorAll('.produto-card').forEach(card => {
-        preencherSelectElemento(card.querySelector('[name="produto"]'), opcoesSelects.produto);
-        preencherSelectElemento(card.querySelector('[name="qualidade"]'), opcoesSelects.qualidade);
-        preencherSelectElemento(card.querySelector('[name="estoqueRetirada"]'), opcoesSelects.estoque);
-        preencherSelectElemento(card.querySelector('[name="defeitoIdentificado"]'), opcoesSelects.defeitoIdentificado);
+        preencherSelectElemento(
+          card.querySelector('[name="produto"]'),
+          opcoesSelects.produto
+        );
+
+        preencherSelectElemento(
+          card.querySelector('[name="qualidade"]'),
+          opcoesSelects.qualidade
+        );
+
+        preencherSelectElemento(
+          card.querySelector('[name="estoqueRetirada"]'),
+          opcoesSelects.estoque
+        );
+
+        preencherSelectElemento(
+          card.querySelector('[name="defeitoIdentificado"]'),
+          opcoesSelects.defeitoIdentificado
+        );
       });
     }
 
     function preencherSelectElemento(select, itens) {
       if (!select) return;
+
       const valorAtual = select.value;
       select.innerHTML = '<option value="">Selecione...</option>';
+
       if (Array.isArray(itens)) {
         itens.forEach(item => {
-          const opt = document.createElement('option');
-          opt.value = item;
-          opt.textContent = item;
-          select.appendChild(opt);
+          const option = document.createElement('option');
+          option.value = item;
+          option.textContent = item;
+          select.appendChild(option);
         });
       }
+
+      garantirOpcaoSelect(select, valorAtual);
       select.value = valorAtual;
     }
 
-    function enviarFormulario(event) {
-      event.preventDefault();
-      document.getElementById('btnSalvar').disabled = true;
-      document.getElementById('loadingDados').style.display = 'block';
+    function definirValor(id, valor) {
+      const elemento = document.getElementById(id);
+      if (!elemento) return;
 
-      const produtos = [];
-      document.querySelectorAll('.produto-card').forEach(card => {
-        produtos.push({
-          produto: card.querySelector('[name="produto"]').value,
-          qualidade: card.querySelector('[name="qualidade"]').value,
-          estoqueRetirada: card.querySelector('[name="estoqueRetirada"]').value,
-          codigoLote: card.querySelector('[name="codigoLote"]').value,
-          defeitoIdentificado: card.querySelector('[name="defeitoIdentificado"]').value
-        });
-      });
+      elemento.value =
+        valor === null || valor === undefined
+          ? ''
+          : valor;
+    }
 
-      const dados = {
+    function definirValorSelect(id, valor) {
+      const select = document.getElementById(id);
+      if (!select) return;
+
+      const texto =
+        valor === null || valor === undefined
+          ? ''
+          : String(valor);
+
+      garantirOpcaoSelect(select, texto);
+      select.value = texto;
+    }
+
+    function definirValorSelectElemento(select, valor) {
+      if (!select) return;
+
+      const texto =
+        valor === null || valor === undefined
+          ? ''
+          : String(valor);
+
+      garantirOpcaoSelect(select, texto);
+      select.value = texto;
+    }
+
+    function preencherFormularioAtualizacao(dados) {
+      modoFormulario = 'atualizar';
+
+      document.getElementById('formManutencao').reset();
+      document.getElementById('tituloFormulario').textContent =
+        'Atualizar Registro de Manutenção';
+      document.getElementById('btnSalvar').textContent =
+        'Atualizar Registro';
+
+      definirValor('dataReclamacao', dados.dataReclamacao);
+      definirValor('empresa', dados.empresa);
+      definirValor('codigoEmteco', dados.codigoEmteco);
+      definirValor('dataCompra', dados.dataCompra);
+      definirValor('reclamacaoDefeito', dados.reclamacaoDefeito);
+      definirValorSelect('faseFalha', dados.faseFalha);
+      definirValorSelect('modalidade', dados.modalidade);
+      definirValor('numeroTarefa', dados.numeroTarefa);
+      definirValorSelect('responsavel', dados.responsavel);
+      definirValor('dataRecebimento', dados.dataRecebimento);
+      definirValor('numeroControle', dados.numeroControle);
+      definirValor('dataTeste', dados.dataTeste);
+      definirValorSelect('itemMovimentado', dados.itemMovimentado);
+      definirValorSelect('tipoEstoque', dados.tipoEstoque);
+      definirValor('dataFinalizacao', dados.dataFinalizacao);
+      definirValor('video', dados.video);
+      definirValor('observacaoExtra', dados.observacaoExtra);
+      definirValor('observacaoFornecedor', dados.observacaoFornecedor);
+
+      const produtos = Array.isArray(dados.produtos)
+        ? dados.produtos
+        : [];
+
+      document.getElementById('quantidade').value =
+        produtos.length > 0 ? produtos.length : 1;
+
+      gerarCardsProdutos(produtos);
+
+      // A tarefa identifica o registro original e não deve ser alterada.
+      document.getElementById('numeroTarefa').disabled = true;
+
+      esconderTelas();
+      document.getElementById('formularioView').classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function coletarProdutos() {
+      return Array.from(document.querySelectorAll('.produto-card')).map(card => ({
+        produto: card.querySelector('[name="produto"]').value,
+        qualidade: card.querySelector('[name="qualidade"]').value,
+        estoqueRetirada: card.querySelector('[name="estoqueRetirada"]').value,
+        codigoLote: card.querySelector('[name="codigoLote"]').value,
+        defeitoIdentificado:
+          card.querySelector('[name="defeitoIdentificado"]').value
+      }));
+    }
+
+    function coletarDadosFormulario() {
+      const produtos = coletarProdutos();
+
+      return {
         dataReclamacao: document.getElementById('dataReclamacao').value,
         empresa: document.getElementById('empresa').value,
         codigoEmteco: document.getElementById('codigoEmteco').value,
@@ -675,26 +1163,146 @@
         dataFinalizacao: document.getElementById('dataFinalizacao').value,
         video: document.getElementById('video').value,
         observacaoExtra: document.getElementById('observacaoExtra').value,
-        observacaoFornecedor: document.getElementById('observacaoFornecedor').value
+        observacaoFornecedor:
+          document.getElementById('observacaoFornecedor').value
       };
+    }
+
+    function enviarFormulario(event) {
+      event.preventDefault();
+
+      const btnSalvar = document.getElementById('btnSalvar');
+      const loading = document.getElementById('loadingDados');
+      const dados = coletarDadosFormulario();
+
+      btnSalvar.disabled = true;
+      loading.style.display = 'block';
+      loading.textContent =
+        modoFormulario === 'atualizar'
+          ? 'Atualizando registro...'
+          : 'Salvando registro...';
+
+      const sucesso = res => {
+        loading.style.display = 'none';
+        btnSalvar.disabled = false;
+        alert(
+          res && res.mensagem
+            ? res.mensagem
+            : (
+              modoFormulario === 'atualizar'
+                ? 'Registro atualizado com sucesso.'
+                : 'Registro salvo com sucesso.'
+            )
+        );
+        mudarTela('home');
+      };
+
+      const erro = err => {
+        loading.style.display = 'none';
+        btnSalvar.disabled = false;
+        alert(
+          (
+            modoFormulario === 'atualizar'
+              ? 'Erro ao atualizar: '
+              : 'Erro ao salvar: '
+          ) +
+          (err.message || err)
+        );
+      };
+
+      if (modoFormulario === 'atualizar') {
+        google.script.run
+          .withSuccessHandler(sucesso)
+          .withFailureHandler(erro)
+          .atualizarFormulario(dados);
+      } else {
+        google.script.run
+          .withSuccessHandler(sucesso)
+          .withFailureHandler(erro)
+          .salvarFormulario(dados);
+      }
+    }
+
+    function abrirEnvioEmail() {
+      const numeroTarefa =
+        document.getElementById('numeroTarefa').value.trim();
+
+      if (!numeroTarefa) {
+        alert(
+          'Informe o número da tarefa antes de enviar o relatório.'
+        );
+        return;
+      }
+
+      document.getElementById('emailTarefa').value = numeroTarefa;
+      document.getElementById('emailDestinatarios').value = '';
+      document.getElementById('modalEmail').style.display = 'flex';
+    }
+
+    function fecharEnvioEmail() {
+      document.getElementById('modalEmail').style.display = 'none';
+    }
+
+    function confirmarEnvioEmail() {
+      const numeroTarefa =
+        document.getElementById('emailTarefa').value.trim();
+      const destinatarios =
+        document.getElementById('emailDestinatarios').value.trim();
+      const botao =
+        document.getElementById('btnConfirmarEmail');
+
+      if (!numeroTarefa) {
+        alert('Informe o número da tarefa.');
+        return;
+      }
+
+      if (!destinatarios) {
+        alert('Informe pelo menos um destinatário.');
+        return;
+      }
+
+      botao.disabled = true;
+      botao.textContent = 'Enviando...';
 
       google.script.run
         .withSuccessHandler(res => {
-          document.getElementById('loadingDados').style.display = 'none';
-          document.getElementById('btnSalvar').disabled = false;
-          alert(res.mensagem);
-          mudarTela('home');
+          botao.disabled = false;
+          botao.textContent = 'Enviar PDF';
+
+          alert(
+            res && res.mensagem
+              ? res.mensagem
+              : 'Relatório enviado com sucesso.'
+          );
+
+          fecharEnvioEmail();
         })
         .withFailureHandler(err => {
-          document.getElementById('loadingDados').style.display = 'none';
-          document.getElementById('btnSalvar').disabled = false;
-          alert("Erro ao salvar: " + err.message);
+          botao.disabled = false;
+          botao.textContent = 'Enviar PDF';
+
+          alert(
+            'Erro ao enviar o relatório: ' +
+            (err.message || err)
+          );
         })
-        .salvarFormulario(dados);
+        .enviarRelatorioEmail(
+          numeroTarefa,
+          destinatarios
+        );
     }
 
+    document.getElementById('modalEmail').addEventListener(
+      'click',
+      function(event) {
+        if (event.target === this) {
+          fecharEnvioEmail();
+        }
+      }
+    );
+
     window.onload = function() {
-      gerarCardsProdutos();
+      gerarCardsProdutos([]);
     };
   </script>
 </body>
